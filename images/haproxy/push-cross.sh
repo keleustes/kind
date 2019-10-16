@@ -46,7 +46,7 @@ for arch_info in "${ARCHES[@]}"; do
   # build image
   tag_arch="$(sed -E 's#^([^,]+),[^,]*,[^,]*$#\1#' <<<"${arch_info}")"
   image="${IMAGE}:${tag_arch}-${TAG}"
-  docker build "--build-arg=ARCH=${tag_arch}" "--build-arg=BASE=${BASE}" -f Dockerfile -t "${image}" .
+  docker build --network=host "--build-arg=ARCH=${tag_arch}" "--build-arg=BASE=${BASE}" -f Dockerfile -t "${image}" .
   docker push "${image}"
   # join image we tagged with arch info for building the manifest later 
   images+=("${image}")

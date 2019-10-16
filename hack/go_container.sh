@@ -72,6 +72,7 @@ detect_and_set_goos_goarch() {
 # run $@ in a golang container with caching etc.
 run_in_go_container() {
   docker run \
+      --network=host \
     `# docker options: remove container on exit, run as the host user / group` \
       --rm --user "$(id -u):$(id -g)" \
     `# golang caching: mount and use the cache volume` \

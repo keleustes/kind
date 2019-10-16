@@ -34,6 +34,7 @@ hack/go_container.sh go build -v -o /out/kindnetd ./cmd/kindnetd
 IMAGE="${IMAGE:-kindest/kindnetd}"
 TAG="${TAG:-$(cat images/kindnetd/VERSION)}"
 docker build \
+  --network=host \
   -t "${IMAGE}:${TAG}" \
   --build-arg="GOARCH=${GOARCH}" \
   -f images/kindnetd/Dockerfile \
